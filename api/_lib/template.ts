@@ -54,7 +54,9 @@ body {
   line-height: 1.14;
   font-size: 48px;
   position: relative;
-  background: #161616;
+  background: #161616 url(https://upstash-og-image.vercel.app/bg.png) no-repeat;
+  background-size: cover;
+  background-position: center;
   height: 100vh;
   color: white;
 }
@@ -137,9 +139,13 @@ export function getHtml(parsedReq: ParsedRequest) {
     <h4 class="author-name">${authorName}</h4>
     <p class="author-title">${authorTitle}</p>
   </div>
-  <div class="author-photo">
-    <img  src="${sanitizeHtml(authorPhoto)}" />
-  </div>
+  ${
+    authorPhoto
+      ? `<div class="author-photo">
+    <img src="${sanitizeHtml(authorPhoto)}" />
+  </div>`
+      : ""
+  }
 </div>
 
 <footer>
