@@ -32,50 +32,79 @@ function getCss() {
     }
 
     * {
-      box-sizing: border-box;
-      border: 0;
-      margin:0;
-      padding: 0;
-      border: 0;
-      background: none;
-    }
-    
-    html {
+  box-sizing: border-box;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+
+html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-    body {
-    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+img {
+  display: block;
+}
+
+body {
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+    Noto Color Emoji;
   line-height: 1.1;
   font-size: 48px;
-    position: relative;
-    width: 880px;
-    height: 460px;
-    background: #161616;
-    height: 100vh;
-    color: white;
-    }
-    
-    .title {
-    position: absolute;
-    inset: 100px 100px auto;
-    fons-size: 112px;
-    }
-    
-    .author {
-    position: absolute;
-    inset: auto 100px 220px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    }
-    
-    .author-name {
-    fons-size: 60px;
-    }
+  position: relative;
+  background: #161616;
+  height: 100vh;
+  color: white;
+}
+
+header {
+  position: absolute;
+  inset: 100px 100px auto;
+}
+
+.title {
+  fons-size: 112px;
+}
+
+.author {
+  position: absolute;
+  inset: auto 100px 220px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.author-name {
+  fons-size: 60px;
+}
+
+.author-photo {
+  font-size: 200px;
+  width: 1em;
+  height: 1em;
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: center;
+  outline: 8px solid #00e9a3;
+  outline-offset: 12px;
+}
+
+footer {
+  position: absolute;
+  inset: auto 80px 0;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #666;
+  border-radius: 80px 80px 0 0;
+}
+
     `;
 }
 
@@ -93,24 +122,27 @@ export function getHtml(parsedReq: ParsedRequest) {
         ${getCss()}
     </style>
     <body>
-            <h1 class="title">
-            ${emojify(marked(text))}
-            </h1>
-           
-            <div class="author">
-              <div>
-                <h4 class="author-name">${authorName}</h4>
-                <p class="author-title">${authorTitle}</p>
-              </div>
-              <div>
-                <img class="photo" src="${sanitizeHtml(authorPhoto)}"/>
-              </div>
-            </div>
-            
-            <footer>
-              <p>blog.upstash.com</p>
-            </footer>
-            
-    </body>
+    
+<header>
+  <h1 class="title">
+    ${emojify(marked(text))}
+  </h1>
+</header>
+
+<div class="author">
+  <div>
+    <h4 class="author-name">${authorName}</h4>
+    <p class="author-title">${authorTitle}</p>
+  </div>
+  <div>
+    <img class="author-photo" src="${sanitizeHtml(authorPhoto)}" />
+  </div>
+</div>
+
+<footer>
+  <p>blog.upstash.com</p>
+</footer>
+
+</body>
 </html>`;
 }

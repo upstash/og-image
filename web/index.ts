@@ -275,10 +275,10 @@ const App = (_: any, state: AppState, setState: SetState) => {
 
   return H(
     "div",
-    { className: "split" },
+    { className: "" },
     H(
       "div",
-      { className: "pull-left" },
+      { className: "" },
       H(
         "div",
         // H(Field, {
