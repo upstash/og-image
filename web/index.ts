@@ -231,15 +231,15 @@ const App = (_: any, state: AppState, setState: SetState) => {
     setState({ ...newState, loading: true });
   };
   const {
-    authorName = "Adem",
-    authorTitle = "Frontend Developer",
-    authorPhoto = "https://blog.upstash.com/img/blog/authors/adem.jpg",
+    text = "Shipping from Logstash to Kafka and analysing with Cloudflare Workers",
+    authorName = "Noah Fischer",
+    authorTitle = "DevRel @Upstash",
+    authorPhoto = "https://avatars.githubusercontent.com/u/78238464?v=4",
 
     fileType = "png",
     fontSize = "100px",
     theme = "light",
     md = true,
-    text = "**Hello** World",
     // images = [imageLightOptions[0].value],
     // widths = [],
     // heights = [],

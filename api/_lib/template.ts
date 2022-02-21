@@ -50,10 +50,8 @@ img {
 
 body {
   font-family: "Inter", ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
-    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
-    Noto Color Emoji;
-  line-height: 1.1;
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+  line-height: 1.16;
   font-size: 48px;
   position: relative;
   background: #161616;
@@ -63,40 +61,46 @@ body {
 
 header {
   position: absolute;
-  inset: 100px 100px auto;
+  inset: 90px 100px auto;
 }
 
 .title {
-  fons-size: 112px;
+  font-size: 112px;
 }
 
 .author {
   position: absolute;
-  inset: auto 100px 220px;
+  inset: auto 100px 200px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .author-name {
-  fons-size: 60px;
+  font-size: 56px;
+  margin-bottom: 10px;
+  color: #00e9a3;
 }
 
 .author-photo {
-  font-size: 200px;
+  border: 8px solid #00e9a3;
+  border-radius: 100%;
+}
+
+.author-photo img {
+  font-size: 220px;
   width: 1em;
   height: 1em;
   border-radius: 100%;
   object-fit: cover;
   object-position: center;
-  outline: 8px solid #00e9a3;
-  outline-offset: 12px;
+  border: 12px solid #161616;
 }
 
 footer {
   position: absolute;
   inset: auto 80px 0;
-  height: 120px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,7 +108,6 @@ footer {
   color: #666;
   border-radius: 80px 80px 0 0;
 }
-
     `;
 }
 
@@ -134,8 +137,8 @@ export function getHtml(parsedReq: ParsedRequest) {
     <h4 class="author-name">${authorName}</h4>
     <p class="author-title">${authorTitle}</p>
   </div>
-  <div>
-    <img class="author-photo" src="${sanitizeHtml(authorPhoto)}" />
+  <div class="author-photo">
+    <img  src="${sanitizeHtml(authorPhoto)}" />
   </div>
 </div>
 
