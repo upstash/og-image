@@ -51,7 +51,7 @@ img {
 body {
   font-family: "Inter", ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
-  line-height: 1.16;
+  line-height: 1.14;
   font-size: 48px;
   position: relative;
   background: #161616;
@@ -61,7 +61,7 @@ body {
 
 header {
   position: absolute;
-  inset: 90px 100px auto;
+  inset: 88px 100px auto;
 }
 
 .title {
@@ -70,9 +70,9 @@ header {
 
 .author {
   position: absolute;
-  inset: auto 100px 200px;
+  inset: auto 100px 190px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
 }
 
