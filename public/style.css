@@ -53,15 +53,8 @@ footer {
 button {
   appearance: none;
   align-items: center;
-  color: #fff;
-  background: #000;
   display: inline-flex;
-  width: 100px;
-  height: 40px;
-  padding: 0 25px;
   outline: none;
-  border: 1px solid #000;
-  font-size: 12px;
   justify-content: center;
   text-transform: uppercase;
   cursor: pointer;
@@ -75,7 +68,6 @@ button {
   white-space: nowrap;
   text-decoration: none;
   line-height: 0;
-
   height: 24px;
   width: calc(100% + 2px);
   padding: 0 10px;

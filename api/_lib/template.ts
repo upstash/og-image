@@ -7,32 +7,21 @@ const twemoji = require("twemoji");
 const twOptions = { folder: "svg", ext: ".svg" };
 const emojify = (text: string) => twemoji.parse(text, twOptions);
 
-const rglr = readFileSync(
+const regular = readFileSync(
   `${__dirname}/../_fonts/Inter-Regular.woff2`
 ).toString("base64");
+
 const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString(
   "base64"
 );
-const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString(
-  "base64"
-);
 
-function getCss(theme: string, fontSize: string) {
-  let background = "white";
-  let foreground = "black";
-  let radial = "lightgray";
-
-  if (theme === "dark") {
-    background = "black";
-    foreground = "white";
-    radial = "dimgray";
-  }
+function getCss() {
   return `
     @font-face {
         font-family: 'Inter';
         font-style:  normal;
         font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${rglr}) format('woff2');
+        src: url(data:font/woff2;charset=utf-8;base64,${regular}) format('woff2');
     }
 
     @font-face {
@@ -42,114 +31,79 @@ function getCss(theme: string, fontSize: string) {
         src: url(data:font/woff2;charset=utf-8;base64,${bold}) format('woff2');
     }
 
-    @font-face {
-        font-family: 'Vera';
-        font-style: normal;
-        font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${mono})  format("woff2");
-      }
-
-    body {
-        background: ${background};
-        background-image: radial-gradient(circle at 25px 25px, ${radial} 2%, transparent 0%), radial-gradient(circle at 75px 75px, ${radial} 2%, transparent 0%);
-        background-size: 100px 100px;
-        height: 100vh;
-        display: flex;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-    }
-
-    code {
-        color: #D400FF;
-        font-family: 'Vera';
-        white-space: pre-wrap;
-        letter-spacing: -5px;
-    }
-
-    code:before, code:after {
-        content: '\`';
-    }
-
-    .logo-wrapper {
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
-        justify-items: center;
-    }
-
-    .logo {
-        margin: 0 75px;
-    }
-
-    .plus {
-        color: #BBB;
-        font-family: Times New Roman, Verdana;
-        font-size: 100px;
-    }
-
-    .spacer {
-        margin: 150px;
-    }
-
-    .emoji {
-        height: 1em;
-        width: 1em;
-        margin: 0 .05em 0 .1em;
-        vertical-align: -0.1em;
+    * {
+      box-sizing: border-box;
+      border: 0;
+      margin:0;
+      padding: 0;
+      border: 0;
+      background: none;
     }
     
-    .heading {
-        font-family: 'Inter', sans-serif;
-        font-size: ${sanitizeHtml(fontSize)};
-        font-style: normal;
-        color: ${foreground};
-        line-height: 1.8;
-    }`;
+    html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+    body {
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  line-height: 1.1;
+  font-size: 48px;
+    position: relative;
+    width: 880px;
+    height: 460px;
+    background: #161616;
+    height: 100vh;
+    color: white;
+    }
+    
+    .title {
+    position: absolute;
+    inset: 100px;
+    bottom: auto;
+    fons-size: 112px;
+    }
+    
+    .author-name {
+    fons-size: 60px;
+    }
+    `;
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
-  const { text, theme, md, fontSize, images, widths, heights } = parsedReq;
+  const { text, authorName, authorPhoto, authorTitle } = parsedReq;
+
+  console.log(text, authorName, authorPhoto, authorTitle);
+
   return `<!DOCTYPE html>
 <html>
     <meta charset="utf-8">
     <title>Generated Image</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        ${getCss(theme, fontSize)}
+        ${getCss()}
     </style>
     <body>
-        <div>
-            <div class="spacer">
-            <div class="logo-wrapper">
-                ${images
-                  .map(
-                    (img, i) =>
-                      getPlusSign(i) + getImage(img, widths[i], heights[i])
-                  )
-                  .join("")}
+            <h1 class="title">
+            ${emojify(marked(text))}
+            </h1>
+           
+            <div>
+              <div>
+                <h4 class="author-name">${authorName}</h4>
+                <p class="author-title">${authorTitle}</p>
+              </div>
+              <div>
+                <img class="photo" src="${sanitizeHtml(authorPhoto)}"/>
+              </div>
             </div>
-            <div class="spacer">
-            <div class="heading">${emojify(
-              md ? marked(text) : sanitizeHtml(text)
-            )}
-            </div>
-        </div>
+            
+            <footer>
+              <p>blog.upstash.com</p>
+            </footer>
+            
     </body>
 </html>`;
-}
-
-function getImage(src: string, width = "auto", height = "225") {
-  return `<img
-        class="logo"
-        alt="Generated Image"
-        src="${sanitizeHtml(src)}"
-        width="${sanitizeHtml(width)}"
-        height="${sanitizeHtml(height)}"
-    />`;
-}
-
-function getPlusSign(i: number) {
-  return i === 0 ? "" : '<div class="plus">+</div>';
 }
