@@ -70,7 +70,7 @@ header {
 
 .author {
   position: absolute;
-  inset: auto 100px 190px;
+  inset: auto 100px 200px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
