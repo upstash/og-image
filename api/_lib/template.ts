@@ -80,7 +80,7 @@ header {
 
 .author-name {
   font-size: 56px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   color: #00e9a3;
 }
 
