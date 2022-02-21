@@ -61,9 +61,16 @@ function getCss() {
     
     .title {
     position: absolute;
-    inset: 100px;
-    bottom: auto;
+    inset: 100px 100px auto;
     fons-size: 112px;
+    }
+    
+    .author {
+    position: absolute;
+    inset: auto 100px 220px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     }
     
     .author-name {
@@ -90,7 +97,7 @@ export function getHtml(parsedReq: ParsedRequest) {
             ${emojify(marked(text))}
             </h1>
            
-            <div>
+            <div class="author">
               <div>
                 <h4 class="author-name">${authorName}</h4>
                 <p class="author-title">${authorTitle}</p>
